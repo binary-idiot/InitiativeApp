@@ -24,7 +24,7 @@
       "dom"
     ],
     "paths": {
-      "@modules/*": ["app/modules"]
+      "@modules/*": ["app/modules/*"]
     }
   },
   "angularCompilerOptions": {
