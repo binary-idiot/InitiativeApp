@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import {TrackerModule} from "@modules/tracker/tracker.module";
 
 
 
@@ -8,8 +9,9 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
   declarations: [
     WelcomeComponent
   ],
-  imports: [
-    CommonModule
-  ]
+    imports: [
+        CommonModule,
+        TrackerModule
+    ]
 })
 export class WelcomeModule { }
