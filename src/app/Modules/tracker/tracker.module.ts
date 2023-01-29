@@ -1,18 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TrackerComponent } from './components/tracker/tracker.component';
+import { TrackerItemComponent } from './components/tracker-item/tracker-item.component';
+import { TrackerItemControlsComponent } from './components/tracker-item-controls/tracker-item-controls.component';
+import {FormsModule} from "@angular/forms";
 
 
 
 @NgModule({
     declarations: [
-        TrackerComponent
+        TrackerComponent,
+        TrackerItemComponent,
+        TrackerItemControlsComponent
     ],
     exports: [
         TrackerComponent
     ],
-    imports: [
-        CommonModule
-    ]
+  imports: [
+    CommonModule,
+    FormsModule
+  ]
 })
 export class TrackerModule { }
