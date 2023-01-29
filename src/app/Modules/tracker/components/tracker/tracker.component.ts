@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {TrackerService} from "@modules/tracker/services/tracker.service";
 
 @Component({
   selector: 'app-tracker',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class TrackerComponent {
 
+  constructor(public trackerService: TrackerService) {
+  }
 }

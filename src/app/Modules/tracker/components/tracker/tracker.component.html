@@ -1,1 +1,6 @@
-<p>tracker works!</p>
+<ul>
+  <app-tracker-item *ngFor="let item of trackerService.getItems() | async"
+    [item]="item">
+  </app-tracker-item>
+</ul>
+<app-tracker-item-controls></app-tracker-item-controls>
