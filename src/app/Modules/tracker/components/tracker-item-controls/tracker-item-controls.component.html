@@ -1,6 +1,42 @@
-<div>
-  <input type="text" [(ngModel)]="currentItem.name">
-  <input type="number" [(ngModel)]="currentItem.health">
-  <input type="number" [(ngModel)]="currentItem.order">
-  <button (click)="addItem()">Add</button>
-</div>
+<form [formGroup]="itemForm" (ngSubmit)="addItem()">
+  <ng-container *ngTemplateOutlet="subField;
+      context: { $implicit: 'name', displayName: 'Name', type: 'text' }">
+  </ng-container>
+  <div class="field is-horizontal">
+<!--    <div class="field">-->
+    <div class="field-label is-normal">
+      <label class="label">Health</label>
+    </div>
+    <div class="field-body is-expanded">
+      <ng-container *ngTemplateOutlet="subField;
+        context: { $implicit: 'health', displayName: 'Health', hideLabel: true, type: 'number' }">
+      </ng-container>
+      <ng-container *ngTemplateOutlet="subField;
+        context: { $implicit: 'order', displayName: 'Order', type: 'number' }">
+      </ng-container>
+    </div>
+<!--    </div>-->
+  </div>
+  <button class="button" type="submit">Add</button>
+
+  <ng-template #subField
+               let-ControlName
+               let-DisplayName="displayName"
+               let-HideLabel="hideLabel"
+               let-InputType="type">
+  <div class="field is-horizontal">
+    <ng-template [ngIf]="!HideLabel">
+      <div class="field-label is-normal">
+        <label class="label">{{DisplayName}}</label>
+      </div>
+    </ng-template>
+    <div class="field-body is-expanded">
+      <div class="control">
+        <input class="input" [type]="InputType" [formControlName]="ControlName" [placeholder]="DisplayName">
+      </div>
+    </div>
+  </div>
+  </ng-template>
+
+</form>
+
