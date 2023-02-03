@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TrackerComponent } from './components/tracker/tracker.component';
 import { TrackerItemComponent } from './components/tracker-item/tracker-item.component';
 import { TrackerItemControlsComponent } from './components/tracker-item-controls/tracker-item-controls.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -18,7 +18,8 @@ import {FormsModule} from "@angular/forms";
     ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class TrackerModule { }
