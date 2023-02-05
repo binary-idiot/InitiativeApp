@@ -16,6 +16,7 @@ input, label, button {
 }
 
 input {
+  display: inline-block;
   padding: $base-spacing*2;
   margin: $base-spacing*2;
   border-radius: 10px;
@@ -28,16 +29,29 @@ button {
   border-radius: 10px;
 }
 
-.horizontal-form {
+@mixin horizontal-form($num-columns: 1){
+  width: 100%;
   display: grid;
-  grid-template-columns: min-content auto;
+  grid-template-columns: repeat($num-columns, min-content auto);
 
   label {
     margin: $base-spacing*4 0 $base-spacing*4 $base-spacing*2 ;
   }
 
-  .form-row {
+  .full-width-control {
     display: contents;
 
+    & label {
+      grid-column: 1;
+    }
+
+    & .control{
+      grid-column-start: 2;
+      grid-column-end: $num-columns*2+1;
+    }
   }
+}
+
+.horizontal-form {
+  @include horizontal-form(2);
 }
