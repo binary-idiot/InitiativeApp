@@ -1,6 +1,8 @@
-<ul>
-  <app-tracker-item *ngFor="let item of trackerService.getItems() | async"
-    [item]="item">
-  </app-tracker-item>
-</ul>
-<app-tracker-item-controls></app-tracker-item-controls>
+<app-tracker-item class="tracker-item m-8"
+  *ngFor="let item of trackerService.getItems() | async"
+  [item]="item">
+</app-tracker-item>
+<p-card class="surface-section">
+  <app-tracker-item-controls></app-tracker-item-controls>
+</p-card>
+

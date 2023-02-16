@@ -1,42 +1,35 @@
-<form [formGroup]="itemForm" (ngSubmit)="addItem()">
-  <ng-container *ngTemplateOutlet="subField;
-      context: { $implicit: 'name', displayName: 'Name', type: 'text' }">
-  </ng-container>
-  <div class="field is-horizontal">
-<!--    <div class="field">-->
-    <div class="field-label is-normal">
-      <label class="label">Health</label>
-    </div>
-    <div class="field-body is-expanded">
-      <ng-container *ngTemplateOutlet="subField;
-        context: { $implicit: 'health', displayName: 'Health', hideLabel: true, type: 'number' }">
-      </ng-container>
-      <ng-container *ngTemplateOutlet="subField;
-        context: { $implicit: 'order', displayName: 'Order', type: 'number' }">
-      </ng-container>
-    </div>
-<!--    </div>-->
-  </div>
-  <button class="button" type="submit">Add</button>
-
-  <ng-template #subField
-               let-ControlName
-               let-DisplayName="displayName"
-               let-HideLabel="hideLabel"
-               let-InputType="type">
-  <div class="field is-horizontal">
-    <ng-template [ngIf]="!HideLabel">
-      <div class="field-label is-normal">
-        <label class="label">{{DisplayName}}</label>
-      </div>
-    </ng-template>
-    <div class="field-body is-expanded">
-      <div class="control">
-        <input class="input" [type]="InputType" [formControlName]="ControlName" [placeholder]="DisplayName">
-      </div>
+<form [formGroup]="itemForm" (ngSubmit)="addItem()"
+      class="grid p-fluid">
+  <div class="col-12">
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">Name</span>
+      <input type="text" pInputText
+            formControlName="name"
+            placeholder="Name">
     </div>
   </div>
-  </ng-template>
 
+  <div class="col-12 md:col-6">
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">Health</span>
+      <p-inputNumber formControlName="health"
+            placeholder="Health">
+      </p-inputNumber>
+    </div>
+  </div>
+
+  <div class="col-12 md:col-6">
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">Order</span>
+      <p-inputNumber formControlName="order"
+                     placeholder="Order">
+      </p-inputNumber>
+    </div>
+  </div>
+
+  <div class="col-6 col-offset-3">
+    <button pButton type="submit" class="justify-content-center">Add</button>
+  </div>
 </form>
+
 

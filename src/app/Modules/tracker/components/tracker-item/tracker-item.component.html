@@ -1,6 +1,10 @@
-<li>
-  <span>Name: {{item.name}}</span>
-  <span> Health: {{item.health}}</span>
-  <span> Order: {{item.order}}</span>
-  <button (click)="removeItem()">Remove</button>
-</li>
+<p-card
+      [header]="item.name">
+  <div class="flex justify-content-around">
+    <span> Health: {{item.health}}</span>
+    <span> Order: {{item.order}}</span>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton (click)="removeItem()">Remove</button>
+  </ng-template>
+</p-card>
