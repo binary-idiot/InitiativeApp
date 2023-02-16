@@ -1,16 +1,16 @@
 <form [formGroup]="itemForm" (ngSubmit)="addItem()">
   <div class="horizontal-form">
-    <div class="full-width-control">
+    <ng-container *ngTemplateOutlet="subField;
+        context: { $implicit: 'name', displayName: 'Name', type: 'text' }">
+    </ng-container>
+    <div class="form-row">
       <ng-container *ngTemplateOutlet="subField;
-          context: { $implicit: 'name', displayName: 'Name', type: 'text' }">
+        context: { $implicit: 'health', displayName: 'Health', type: 'number' }">
+      </ng-container>
+      <ng-container *ngTemplateOutlet="subField;
+        context: { $implicit: 'order', displayName: 'Order', type: 'number' }">
       </ng-container>
     </div>
-    <ng-container *ngTemplateOutlet="subField;
-      context: { $implicit: 'health', displayName: 'Health', type: 'number' }">
-    </ng-container>
-    <ng-container *ngTemplateOutlet="subField;
-      context: { $implicit: 'order', displayName: 'Order', type: 'number' }">
-    </ng-container>
   </div>
   <button class="button" type="submit">Add</button>
 
@@ -19,7 +19,7 @@
                let-DisplayName="displayName"
                let-InputType="type">
     <label class="label">{{DisplayName}}</label>
-    <input class="control" [type]="InputType" [formControlName]="ControlName" [placeholder]="DisplayName">
+    <input class="input" [type]="InputType" [formControlName]="ControlName" [placeholder]="DisplayName">
   </ng-template>
 
 </form>
