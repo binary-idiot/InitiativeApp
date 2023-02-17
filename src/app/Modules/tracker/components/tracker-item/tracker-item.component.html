@@ -1,10 +1,11 @@
 <p-card
       [header]="item.name">
-  <div class="flex justify-content-around">
+  <div class="flex gap-4 align-content-center">
     <span> Health: {{item.health}}</span>
     <span> Order: {{item.order}}</span>
+    <button pButton (click)="removeItem()"
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-danger">
+    </button>
   </div>
-  <ng-template pTemplate="footer">
-    <button pButton (click)="removeItem()">Remove</button>
-  </ng-template>
 </p-card>
