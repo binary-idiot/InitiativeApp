@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { WelcomeComponent } from '@modules/welcome/components/welcome/welcome.component';
-import {WelcomeModule} from "@modules/welcome/welcome.module";
+import {TrackerModule} from "@modules/tracker/tracker.module";
+import {TrackerPage} from "@modules/tracker/pages/tracker-page/tracker-page.component";
 
 const routes: Routes = [
-  { path: '', component: WelcomeComponent}
+  { path: '', component: TrackerPage}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [
     RouterModule,
-    WelcomeModule
+    TrackerModule
   ]
 })
 export class AppRoutingModule { }

@@ -10,6 +10,7 @@ import {ButtonModule} from "primeng/button";
 import {PanelModule} from "primeng/panel";
 import {CardModule} from "primeng/card";
 import {DividerModule} from "primeng/divider";
+import { TrackerPage } from './pages/tracker-page/tracker-page.component';
 
 
 
@@ -17,7 +18,8 @@ import {DividerModule} from "primeng/divider";
     declarations: [
         TrackerComponent,
         TrackerItemComponent,
-        TrackerItemControlsComponent
+        TrackerItemControlsComponent,
+        TrackerPage
     ],
     exports: [
         TrackerComponent
