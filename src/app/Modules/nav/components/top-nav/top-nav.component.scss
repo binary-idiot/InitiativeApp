@@ -1,0 +1,11 @@
+::ng-deep{
+  p-menubarsub{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  a.p-menubar-button{
+    order: 3;
+  }
+}
