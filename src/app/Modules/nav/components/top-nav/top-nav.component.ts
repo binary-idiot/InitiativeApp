@@ -13,11 +13,13 @@ export class TopNavComponent implements OnInit {
   ngOnInit(): void {
     this.navItems = [{
       label: 'Tracker',
-      icon: 'pi pi-list'
+      icon: 'pi pi-list',
+      routerLink: '/tracker'
     },
     {
-      label: 'Settings',
-      icon: 'pi pi-cog'
+      label: 'Config',
+      icon: 'pi pi-cog',
+      routerLink: '/config'
     }];
   }
 
