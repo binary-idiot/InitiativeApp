@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {TrackerItem} from "@modules/tracker/models/tracker-item.model";
+import {TrackerItem} from "@shared/models/tracker-item.model";
 import {TrackerService} from "@modules/tracker/services/tracker.service";
 
 @Component({

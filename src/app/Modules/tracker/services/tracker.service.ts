@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import {TrackerItem} from "@modules/tracker/models/tracker-item.model";
+import {TrackerItem} from "@shared/models/tracker-item.model";
 
 @Injectable({
   providedIn: 'root'

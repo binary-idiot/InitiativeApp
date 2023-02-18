@@ -24,7 +24,8 @@
       "dom"
     ],
     "paths": {
-      "@modules/*": ["app/modules/*"]
+      "@modules/*": ["app/modules/*"],
+      "@shared/*": ["app/shared/*"]
     },
     "strictPropertyInitialization": false
   },

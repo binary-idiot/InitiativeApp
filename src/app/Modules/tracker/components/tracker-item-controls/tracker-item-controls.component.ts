@@ -1,6 +1,6 @@
 ﻿import {Component, OnInit} from '@angular/core';
 import {TrackerService} from "@modules/tracker/services/tracker.service";
-import {TrackerItem} from "@modules/tracker/models/tracker-item.model";
+import {TrackerItem} from "@shared/models/tracker-item.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
