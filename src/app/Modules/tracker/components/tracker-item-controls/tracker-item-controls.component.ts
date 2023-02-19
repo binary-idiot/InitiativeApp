@@ -1,32 +1,57 @@
-﻿import {Component, OnInit} from '@angular/core';
-import {TrackerService} from "@modules/tracker/services/tracker.service";
-import {TrackerItem} from "@shared/models/tracker-item.model";
-import {FormBuilder, FormGroup} from "@angular/forms";
+﻿import {Component, OnDestroy, OnInit} from '@angular/core';
+
+import { FormControl, FormGroup} from "@angular/forms";
+import {
+  TrackerItemDataFieldSchema,
+  TrackerItemDataFieldType,
+  TrackerItemSchema
+} from "@shared/models/tracker-item.schema";
+import {GameSystemService} from "@modules/game-system/services/game-system.service";
+import {Subscription} from "rxjs";
+import {GameSystem} from "@shared/models/game-system.model";
+
 
 @Component({
   selector: 'app-tracker-item-controls',
   templateUrl: './tracker-item-controls.component.html',
   styleUrls: ['./tracker-item-controls.component.scss']
 })
-export class TrackerItemControlsComponent implements OnInit{
+export class TrackerItemControlsComponent implements OnInit, OnDestroy{
+
+  systemSub: Subscription;
   itemForm: FormGroup;
+
+  readonly fieldType = TrackerItemDataFieldType;
+
   constructor(
-    private trackerService: TrackerService,
-    private fb: FormBuilder) {
+    // private trackerService: TrackerService,
+    public systemService: GameSystemService) {
   }
 
   ngOnInit(): void {
-    this.itemForm = this.fb.nonNullable.group<TrackerItem>({
-      name: '',
-      health: 0,
-      order: 0
-    })
+    this.systemSub = this.systemService.selectedSystem()
+      .subscribe((system: GameSystem) => {
+        this.buildForm(system.itemModel);
+      })
   }
 
+  buildForm(itemSchema: TrackerItemSchema) {
+    const dataFields: { [key: string]: FormControl } = {};
+
+    itemSchema.dataFields.forEach((field: TrackerItemDataFieldSchema) => {
+      dataFields[field.name] = new FormControl(field.defaultValue);
+    });
+
+    this.itemForm = new FormGroup(dataFields);
+  }
 
   addItem(): void {
-    this.trackerService.addItem(this.itemForm.value);
+    // this.trackerService.addItem(this.itemForm.value);
     this.itemForm.reset()
+  }
+
+  ngOnDestroy(): void {
+    this.systemSub.unsubscribe()
   }
 
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, map, Observable} from "rxjs";
 import {GameSystem} from "@shared/models/game-system.model";
 import {TrackerItemDataFieldType} from "@shared/models/tracker-item.schema";
 
@@ -14,24 +14,34 @@ export class GameSystemService {
       itemModel: {
         dataFields: [
           {
-            fieldName: 'name',
-            fieldType: TrackerItemDataFieldType.text
+            name: 'name',
+            type: TrackerItemDataFieldType.text,
+            defaultValue: ''
           },
           {
-            fieldName: 'HP',
-            fieldType: TrackerItemDataFieldType.number
+            name: 'Health',
+            type: TrackerItemDataFieldType.number,
+            defaultValue: 0
           },
           {
-            fieldName: 'Order',
-            fieldType: TrackerItemDataFieldType.number
+            name: 'Order',
+            type: TrackerItemDataFieldType.number,
+            defaultValue: 0
           }
         ]
       }
     }
   ])
 
-  getSystems(): Observable<GameSystem[]> {
+  systems(): Observable<GameSystem[]> {
     return this.systems$.asObservable();
+  }
+
+  selectedSystem(): Observable<GameSystem> {
+    return this.systems()
+      .pipe(
+        map((systems: GameSystem[]) => systems[0])
+      );
   }
 
   constructor() { }

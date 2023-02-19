@@ -4,8 +4,9 @@ export enum TrackerItemDataFieldType {
 }
 
 export interface TrackerItemDataFieldSchema {
-  fieldName: string;
-  fieldType: TrackerItemDataFieldType
+  name: string;
+  type: TrackerItemDataFieldType;
+  defaultValue: unknown;
 }
 
 export interface TrackerItemSchema {
