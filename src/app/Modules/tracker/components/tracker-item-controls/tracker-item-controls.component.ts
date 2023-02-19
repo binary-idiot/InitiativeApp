@@ -9,6 +9,7 @@ import {
 import {GameSystemService} from "@modules/game-system/services/game-system.service";
 import {Subscription} from "rxjs";
 import {GameSystem} from "@shared/models/game-system.model";
+import {TrackerService} from "@modules/tracker/services/tracker.service";
 
 
 @Component({
@@ -25,8 +26,8 @@ export class TrackerItemControlsComponent implements OnInit, OnDestroy{
   readonly fieldType = ItemDataFieldType;
 
   constructor(
-    // private trackerService: TrackerService,
-    public systemService: GameSystemService) {
+    public systemService: GameSystemService,
+    private trackerService: TrackerService) {
   }
 
   ngOnInit(): void {
@@ -53,8 +54,7 @@ export class TrackerItemControlsComponent implements OnInit, OnDestroy{
   }
 
   addItem(): void {
-    // this.trackerService.addItem(this.itemForm.value);
-    const val = this.itemForm.value;
+    this.trackerService.addItem(this.itemForm.value);
     this.buildForm();
   }
 

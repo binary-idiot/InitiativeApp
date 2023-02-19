@@ -1,5 +1,6 @@
-﻿export interface TrackerItem {
+﻿import {ItemDataFieldValueType} from "@shared/models/item.schema";
+
+export interface TrackerItem {
   name: string;
-  health: number;
-  order: number;
+  dataFields: { [key: number]: ItemDataFieldValueType}
 }

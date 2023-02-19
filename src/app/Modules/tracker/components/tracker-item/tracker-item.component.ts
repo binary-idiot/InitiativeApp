@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {TrackerItem} from "@shared/models/tracker-item.model";
 import {TrackerService} from "@modules/tracker/services/tracker.service";
+import {GameSystemService} from "@modules/game-system/services/game-system.service";
 
 @Component({
   selector: 'app-tracker-item',
@@ -10,7 +11,9 @@ import {TrackerService} from "@modules/tracker/services/tracker.service";
 export class TrackerItemComponent {
   @Input() item: TrackerItem;
 
-  constructor(private trackerService: TrackerService) {
+  constructor(
+    public systemService: GameSystemService,
+    private trackerService: TrackerService) {
   }
 
   removeItem(): void {

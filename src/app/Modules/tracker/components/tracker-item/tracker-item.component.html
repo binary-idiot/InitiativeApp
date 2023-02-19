@@ -1,8 +1,11 @@
 <p-card
       [header]="item.name">
   <div class="flex gap-4 align-content-center">
-    <span> Health: {{item.health}}</span>
-    <span> Order: {{item.order}}</span>
+    <ng-container *ngIf="systemService.selectedSystem() | async as system">
+      <ng-container *ngFor="let field of system.itemModel.dataFields">
+        <span>{{field.label}}: {{item.dataFields[field.key]}}</span>
+      </ng-container>
+    </ng-container>
     <button pButton (click)="removeItem()"
             icon="pi pi-trash"
             class="p-button-rounded p-button-danger">
