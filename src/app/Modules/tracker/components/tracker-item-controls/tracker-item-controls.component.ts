@@ -1,6 +1,6 @@
 ﻿import {Component, OnDestroy, OnInit} from '@angular/core';
 
-import { FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {
   TrackerItemDataFieldSchema,
   TrackerItemDataFieldType,
@@ -20,6 +20,7 @@ export class TrackerItemControlsComponent implements OnInit, OnDestroy{
 
   systemSub: Subscription;
   itemForm: FormGroup;
+  itemSchema: TrackerItemSchema;
 
   readonly fieldType = TrackerItemDataFieldType;
 
@@ -31,15 +32,16 @@ export class TrackerItemControlsComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.systemSub = this.systemService.selectedSystem()
       .subscribe((system: GameSystem) => {
-        this.buildForm(system.itemModel);
+        this.itemSchema = system.itemModel;
+        this.buildForm();
       })
   }
 
-  buildForm(itemSchema: TrackerItemSchema) {
+  buildForm() {
     const dataFields: { [key: string]: FormControl } = {};
 
-    itemSchema.dataFields.forEach((field: TrackerItemDataFieldSchema) => {
-      dataFields[field.name] = new FormControl(field.defaultValue);
+    this.itemSchema.dataFields.forEach((field: TrackerItemDataFieldSchema) => {
+      dataFields[field.name] = new FormControl(field.defaultValue, Validators.required);
     });
 
     this.itemForm = new FormGroup(dataFields);
@@ -47,7 +49,8 @@ export class TrackerItemControlsComponent implements OnInit, OnDestroy{
 
   addItem(): void {
     // this.trackerService.addItem(this.itemForm.value);
-    this.itemForm.reset()
+    const val = this.itemForm.value;
+    this.buildForm();
   }
 
   ngOnDestroy(): void {
