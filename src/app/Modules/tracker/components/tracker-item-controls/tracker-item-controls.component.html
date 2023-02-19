@@ -2,19 +2,26 @@
 <!--      class="grid p-fluid">-->
 
   <ng-container *ngIf="systemService.selectedSystem() | async as system">
-    <ng-container *ngFor="let field of system.itemModel.dataFields">
-      <div class="p-inputgroup"
-        [ngSwitch]="field.type">
-        <span class="p-inputgroup-addon">{{field.name}}</span>
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">{{system.itemModel.nameField.label}}</span>
+      <input type="text" pInputText
+        formControlName="name">
+    </div>
+    <ng-container formGroupName="dataFields">
+      <ng-container *ngFor="let field of system.itemModel.dataFields">
+        <div class="p-inputgroup"
+          [ngSwitch]="field.type">
+          <span class="p-inputgroup-addon">{{field.label}}</span>
 
-        <input *ngSwitchCase="fieldType.text"
-          type="text" pInputText
-          [formControlName]="field.name">
+          <input *ngSwitchCase="fieldType.Text"
+            type="text" pInputText
+            [formControlName]="field.key">
 
-        <p-inputNumber *ngSwitchCase="fieldType.number"
-          [formControlName]="field.name">
-        </p-inputNumber>
-      </div>
+          <p-inputNumber *ngSwitchCase="fieldType.Number"
+            [formControlName]="field.key">
+          </p-inputNumber>
+        </div>
+      </ng-container>
     </ng-container>
   </ng-container>
 

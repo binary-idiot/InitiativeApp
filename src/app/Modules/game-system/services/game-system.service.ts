@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {GameSystem} from "@shared/models/game-system.model";
-import {TrackerItemDataFieldType} from "@shared/models/tracker-item.schema";
+import {ItemDataFieldType} from "@shared/models/item.schema";
 
 @Injectable({
   providedIn: 'root'
@@ -12,21 +12,24 @@ export class GameSystemService {
     {
       systemName: 'd&d',
       itemModel: {
+        nameField: {
+          label: 'Name',
+          defaultValue: ''
+        },
         dataFields: [
           {
-            name: 'name',
-            type: TrackerItemDataFieldType.text,
-            defaultValue: ''
+            key: 1,
+            label: 'Health',
+            type: ItemDataFieldType.Number,
+            defaultValue: 0,
+            required: true
           },
           {
-            name: 'Health',
-            type: TrackerItemDataFieldType.number,
-            defaultValue: 0
-          },
-          {
-            name: 'Order',
-            type: TrackerItemDataFieldType.number,
-            defaultValue: 0
+            key: 2,
+            label: 'Order',
+            type: ItemDataFieldType.Number,
+            defaultValue: 0,
+            required: true
           }
         ]
       }

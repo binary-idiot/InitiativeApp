@@ -2,10 +2,10 @@
 
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {
-  TrackerItemDataFieldSchema,
-  TrackerItemDataFieldType,
-  TrackerItemSchema
-} from "@shared/models/tracker-item.schema";
+  ItemDataFieldSchema,
+  ItemDataFieldType,
+  ItemSchema
+} from "@shared/models/item.schema";
 import {GameSystemService} from "@modules/game-system/services/game-system.service";
 import {Subscription} from "rxjs";
 import {GameSystem} from "@shared/models/game-system.model";
@@ -20,9 +20,9 @@ export class TrackerItemControlsComponent implements OnInit, OnDestroy{
 
   systemSub: Subscription;
   itemForm: FormGroup;
-  itemSchema: TrackerItemSchema;
+  itemSchema: ItemSchema;
 
-  readonly fieldType = TrackerItemDataFieldType;
+  readonly fieldType = ItemDataFieldType;
 
   constructor(
     // private trackerService: TrackerService,
@@ -38,13 +38,18 @@ export class TrackerItemControlsComponent implements OnInit, OnDestroy{
   }
 
   buildForm() {
-    const dataFields: { [key: string]: FormControl } = {};
+    const dataFields: { [key: number]: FormControl } = {};
 
-    this.itemSchema.dataFields.forEach((field: TrackerItemDataFieldSchema) => {
-      dataFields[field.name] = new FormControl(field.defaultValue, Validators.required);
+    this.itemSchema.dataFields.forEach((field: ItemDataFieldSchema) => {
+      dataFields[field.key] = (field.required)
+        ? new FormControl(field.defaultValue, Validators.required)
+        : new FormControl(field.defaultValue);
     });
 
-    this.itemForm = new FormGroup(dataFields);
+    this.itemForm = new FormGroup({
+      name: new FormControl(this.itemSchema.nameField.defaultValue, Validators.required),
+      dataFields: new FormGroup(dataFields)
+    });
   }
 
   addItem(): void {

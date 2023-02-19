@@ -1,6 +1,6 @@
-import {TrackerItemSchema} from "./tracker-item.schema";
+import {ItemSchema} from "./item.schema";
 
 export interface GameSystem {
   systemName: string;
-  itemModel: TrackerItemSchema;
+  itemModel: ItemSchema;
 }
