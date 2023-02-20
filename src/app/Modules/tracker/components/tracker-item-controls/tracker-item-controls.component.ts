@@ -7,9 +7,10 @@ import {
   ItemSchema
 } from "@shared/models/item.schema";
 import {GameSystemService} from "@modules/game-system/services/game-system.service";
-import {Subscription} from "rxjs";
+import {filter, Subscription} from "rxjs";
 import {GameSystem} from "@shared/models/game-system.model";
 import {TrackerService} from "@modules/tracker/services/tracker.service";
+import {isNonNull} from "@shared/utils/type-utils";
 
 
 @Component({
@@ -32,6 +33,9 @@ export class TrackerItemControlsComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.systemSub = this.systemService.selectedSystem()
+      .pipe(
+        filter(isNonNull)
+      )
       .subscribe((system: GameSystem) => {
         this.itemSchema = system.itemModel;
         this.buildForm();

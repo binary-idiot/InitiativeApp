@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, map, Observable} from "rxjs";
+import {BehaviorSubject, Observable, of, switchMap, withLatestFrom} from "rxjs";
 import {GameSystem} from "@shared/models/game-system.model";
 import {ItemDataFieldType} from "@shared/models/item.schema";
 
@@ -8,8 +8,10 @@ import {ItemDataFieldType} from "@shared/models/item.schema";
 })
 export class GameSystemService {
 
+  private selected$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   private systems$: BehaviorSubject<GameSystem[]> = new BehaviorSubject<GameSystem[]>([
     {
+      key: 0,
       systemName: 'd&d',
       itemModel: {
         nameField: {
@@ -18,14 +20,14 @@ export class GameSystemService {
         },
         dataFields: [
           {
-            key: 1,
+            key: 0,
             label: 'Health',
             type: ItemDataFieldType.Number,
             defaultValue: 0,
             required: true
           },
           {
-            key: 2,
+            key: 1,
             label: 'Order',
             type: ItemDataFieldType.Number,
             defaultValue: 0,
@@ -40,11 +42,14 @@ export class GameSystemService {
     return this.systems$.asObservable();
   }
 
-  selectedSystem(): Observable<GameSystem> {
-    return this.systems()
+  selectedSystem(): Observable<GameSystem | null> {
+    return this.systems$
       .pipe(
-        map((systems: GameSystem[]) => systems[0])
-      );
+        withLatestFrom(this.selected$),
+        switchMap(([systems, selected]) => {
+          return of(systems.find(systems => systems.key === selected) ?? null)
+        })
+      )
   }
 
   constructor() { }
