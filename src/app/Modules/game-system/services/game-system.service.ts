@@ -52,5 +52,19 @@ export class GameSystemService {
       )
   }
 
+  getNewSystem(): GameSystem {
+    return {
+      key: -1,
+      systemName: 'New System',
+      itemModel: {
+        nameField: {
+          label: 'Name',
+          defaultValue: ''
+        },
+        dataFields: []
+      }
+    }
+  }
+
   constructor() { }
 }

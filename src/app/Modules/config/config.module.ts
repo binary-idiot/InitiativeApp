@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfigPage } from './pages/config-page/config-page.component';
+import {AccordionModule} from "primeng/accordion";
+import {GameSystemModule} from "@modules/game-system/game-system.module";
 
 
 
@@ -9,7 +11,9 @@ import { ConfigPage } from './pages/config-page/config-page.component';
     ConfigPage
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    AccordionModule,
+    GameSystemModule
   ]
 })
 export class ConfigModule { }
