@@ -5,10 +5,10 @@ import {GameSystem} from "@shared/models/game-system.model";
 
 @Component({
   selector: 'app-game-system-config',
-  templateUrl: './game-system-config.component.html',
-  styleUrls: ['./game-system-config.component.scss']
+  templateUrl: './game-system-config-section.component.html',
+  styleUrls: ['./game-system-config-section.component.scss']
 })
-export class GameSystemConfigComponent implements OnInit, OnDestroy {
+export class GameSystemConfigSectionComponent implements OnInit, OnDestroy {
   systemSub: Subscription;
   systems: GameSystem[];
   selectedSystem$: Observable<GameSystem | null>;

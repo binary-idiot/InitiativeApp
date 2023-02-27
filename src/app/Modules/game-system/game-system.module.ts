@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameSystemConfigComponent } from './components/game-system-config/game-system-config.component';
+import { GameSystemConfigSectionComponent } from './components/game-system-config/game-system-config-section.component';
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
 
@@ -8,10 +8,10 @@ import {FormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
-        GameSystemConfigComponent
+        GameSystemConfigSectionComponent
     ],
     exports: [
-        GameSystemConfigComponent
+        GameSystemConfigSectionComponent
     ],
   imports: [
     CommonModule,
