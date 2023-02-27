@@ -1,7 +1,7 @@
 <form [formGroup]="itemForm" (ngSubmit)="addItem()">
 <!--      class="grid p-fluid">-->
 
-  <ng-container *ngIf="systemService.selectedSystem() | async as system">
+  <ng-container *ngIf="systemFacade.selectedSystem$ | async as system">
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon">{{system.itemModel.nameField.label}}</span>
       <input type="text" pInputText

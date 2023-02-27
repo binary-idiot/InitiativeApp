@@ -1,7 +1,7 @@
 <p-card
       [header]="item.name">
   <div class="flex gap-4 align-content-center">
-    <ng-container *ngIf="systemService.selectedSystem() | async as system">
+    <ng-container *ngIf="systemFacade.selectedSystem$ | async as system">
       <ng-container *ngFor="let field of system.itemModel.dataFields">
         <span>{{field.label}}: {{item.dataFields[field.key]}}</span>
       </ng-container>

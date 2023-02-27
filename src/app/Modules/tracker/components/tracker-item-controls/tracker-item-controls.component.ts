@@ -6,11 +6,11 @@ import {
   ItemDataFieldType,
   ItemSchema
 } from "@shared/models/item.schema";
-import {GameSystemService} from "@modules/game-system/services/game-system.service";
 import {filter, Subscription} from "rxjs";
 import {GameSystem} from "@shared/models/game-system.model";
 import {TrackerService} from "@modules/tracker/services/tracker.service";
 import {isNonNull} from "@shared/utils/type-utils";
+import {GameSystemFacade} from "@modules/game-system/game-system.facade";
 
 
 @Component({
@@ -27,12 +27,12 @@ export class TrackerItemControlsComponent implements OnInit, OnDestroy{
   readonly fieldType = ItemDataFieldType;
 
   constructor(
-    public systemService: GameSystemService,
+    public systemFacade: GameSystemFacade,
     private trackerService: TrackerService) {
   }
 
   ngOnInit(): void {
-    this.systemSub = this.systemService.selectedSystem()
+    this.systemSub = this.systemFacade.selectedSystem$
       .pipe(
         filter(isNonNull)
       )
