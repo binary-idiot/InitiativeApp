@@ -6,10 +6,10 @@ import {GameSystemFacade} from "@modules/game-system/game-system.facade";
 
 @Component({
   selector: 'app-game-system-config',
-  templateUrl: './game-system-config-section.component.html',
-  styleUrls: ['./game-system-config-section.component.scss']
+  templateUrl: './game-system-config.component.html',
+  styleUrls: ['./game-system-config.component.scss']
 })
-export class GameSystemConfigSectionComponent implements OnInit, OnDestroy {
+export class GameSystemConfigComponent implements OnInit, OnDestroy {
   systemSub: Subscription;
   systems: GameSystem[];
   selectedSystem$: Observable<GameSystem | null>;
