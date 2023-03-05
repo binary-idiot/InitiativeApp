@@ -3,6 +3,7 @@ import {GameSystemService} from "@modules/game-system/services/game-system.servi
 import {Observable, of, Subscription, switchMap, take} from "rxjs";
 import {GameSystem} from "@shared/models/game-system.model";
 import {GameSystemFacade} from "@modules/game-system/game-system.facade";
+import {nameOf} from "@shared/utils/type-utils";
 
 @Component({
   selector: 'app-game-system-config',
@@ -10,6 +11,7 @@ import {GameSystemFacade} from "@modules/game-system/game-system.facade";
   styleUrls: ['./game-system-config.component.scss']
 })
 export class GameSystemConfigComponent implements OnInit, OnDestroy {
+  optionLabel: string = nameOf<GameSystem>('name');
   systemSub: Subscription;
   systems: GameSystem[];
   selectedSystem$: Observable<GameSystem | null>;
