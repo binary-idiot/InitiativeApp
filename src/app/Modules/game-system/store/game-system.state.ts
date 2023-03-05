@@ -11,7 +11,7 @@ export interface GameSystemStateModel {
   selected: number | null;
 }
 
-export const GAME_SYSTEM_STATE_TOKEN = new StateToken<GameSystemStateModel>('GameSystemState');
+export const GAME_SYSTEM_STATE_TOKEN = new StateToken<GameSystemStateModel>('game_system_state');
 
 @State<GameSystemStateModel>({
   name: GAME_SYSTEM_STATE_TOKEN,
