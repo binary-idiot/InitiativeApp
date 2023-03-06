@@ -1,5 +1,6 @@
 <p-dropdown [options]="(systemFacade.systems$ | async) ?? []"
             [ngModel]="(systemFacade.selectedSystem$ | async)?.key"
+            [optionValue]="valueName"
             [optionLabel]="labelName"
             (onChange)="systemFacade.changeSystem($event.value)">
 </p-dropdown>
