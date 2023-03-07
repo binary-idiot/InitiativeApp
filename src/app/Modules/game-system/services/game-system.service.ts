@@ -11,11 +11,15 @@ export class GameSystemService {
     return [
       {
         key: 0,
-        systemName: 'd&d',
+        name: 'd&d',
         itemModel: {
           nameField: {
             label: 'Name',
             defaultValue: ''
+          },
+          orderField: {
+            label: 'Order',
+            defaultValue: 1
           },
           dataFields: [
             {
@@ -27,7 +31,38 @@ export class GameSystemService {
             },
             {
               key: 1,
-              label: 'Order',
+              label: 'Armor',
+              type: ItemDataFieldType.Number,
+              defaultValue: 0,
+              required: true
+            }
+          ]
+        }
+      },
+
+      {
+        key: 1,
+        name: 'alt d&d',
+        itemModel: {
+          nameField: {
+            label: 'Player',
+            defaultValue: ''
+          },
+          orderField: {
+            label: 'Initiative',
+            defaultValue: 1
+          },
+          dataFields: [
+            {
+              key: 0,
+              label: 'HP',
+              type: ItemDataFieldType.Number,
+              defaultValue: 0,
+              required: true
+            },
+            {
+              key: 1,
+              label: 'AC',
               type: ItemDataFieldType.Number,
               defaultValue: 0,
               required: true
@@ -35,17 +70,22 @@ export class GameSystemService {
           ]
         }
       }
+
     ]
   }
 
   getNewSystem(): GameSystem {
     return {
       key: -1,
-      systemName: 'New System',
+      name: 'New System',
       itemModel: {
         nameField: {
           label: 'Name',
           defaultValue: ''
+        },
+        orderField: {
+          label: 'Order',
+          defaultValue: 0
         },
         dataFields: []
       }

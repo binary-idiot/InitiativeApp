@@ -5,6 +5,11 @@ export enum ItemDataFieldType {
 
 export type ItemDataFieldValueType = string | Number;
 
+export interface ItemPrimaryFieldSchema<T> {
+  label: string,
+  defaultValue: T
+}
+
 export interface ItemDataFieldSchema {
   key: number;
   label: string;
@@ -14,7 +19,8 @@ export interface ItemDataFieldSchema {
 }
 
 export interface ItemSchema {
-  nameField: { label: string, defaultValue: string };
+  nameField: ItemPrimaryFieldSchema<string>;
+  orderField: ItemPrimaryFieldSchema<number>;
   dataFields: ItemDataFieldSchema[];
 }
 

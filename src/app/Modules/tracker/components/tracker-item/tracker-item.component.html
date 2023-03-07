@@ -1,5 +1,5 @@
 <p-card
-      [header]="item.name">
+      [header]="item.order + ' ' + item.name">
   <div class="flex gap-4 align-content-center">
     <ng-container *ngIf="systemFacade.selectedSystem$ | async as system">
       <ng-container *ngFor="let field of system.itemModel.dataFields">

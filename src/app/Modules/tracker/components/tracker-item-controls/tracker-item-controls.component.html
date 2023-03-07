@@ -1,11 +1,16 @@
-<form [formGroup]="itemForm" (ngSubmit)="addItem()">
-<!--      class="grid p-fluid">-->
+<form [formGroup]="itemForm" (ngSubmit)="addItem()"
+      class="grid p-fluid">
 
   <ng-container *ngIf="systemFacade.selectedSystem$ | async as system">
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon">{{system.itemModel.nameField.label}}</span>
       <input type="text" pInputText
         formControlName="name">
+    </div>
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">{{system.itemModel.orderField.label}}</span>
+      <input type="text" pInputText
+             formControlName="name">
     </div>
     <ng-container formGroupName="dataFields">
       <ng-container *ngFor="let field of system.itemModel.dataFields">

@@ -53,6 +53,7 @@ export class TrackerItemControlsComponent implements OnInit, OnDestroy{
 
     this.itemForm = new FormGroup({
       name: new FormControl(this.itemSchema.nameField.defaultValue, Validators.required),
+      order: new FormControl(this.itemSchema.orderField.defaultValue, Validators.required),
       dataFields: new FormGroup(dataFields)
     });
   }
