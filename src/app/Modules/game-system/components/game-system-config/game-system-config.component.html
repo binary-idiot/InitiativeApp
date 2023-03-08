@@ -1,3 +1,3 @@
-<p-dropdown [options]="(systemFacade.systems$ | async) ?? []"
+<p-dropdown [options]="systems"
             [(ngModel)]="selectedSystem$"
             [optionLabel]="optionLabel"></p-dropdown>
