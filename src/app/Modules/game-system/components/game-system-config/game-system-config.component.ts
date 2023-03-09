@@ -1,11 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GameSystemService} from "@modules/game-system/services/game-system.service";
 import {Observable, of, Subscription, switchMap, take} from "rxjs";
-import {GameSystem} from "@shared/models/game-system.model";
+import {GameSystem, GameSystemForm} from "@shared/models/game-system.model";
 import {GameSystemFacade} from "@modules/game-system/game-system.facade";
 import {nameOf} from "@shared/utils/type-utils";
-import { FormBuilder } from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {ItemDataFieldSchema} from "@shared/models/item.schema";
+
+
+
+
 
 @Component({
   selector: 'app-game-system-config',
@@ -17,8 +21,8 @@ export class GameSystemConfigComponent implements OnInit, OnDestroy {
   systemSub: Subscription;
   systems: GameSystem[];
   selectedSystem$: Observable<GameSystem | null>;
+  systemForm: FormGroup<GameSystemForm>;
 
-  systemForm: unknown;
   constructor(
     public systemService: GameSystemService,
     public systemFacade: GameSystemFacade,
@@ -63,7 +67,7 @@ export class GameSystemConfigComponent implements OnInit, OnDestroy {
           label: system.itemModel.orderField.label,
           defaultValue: system.itemModel.orderField.defaultValue
         }),
-        dataFields: dataFields
+        dataFields: this.fb.nonNullable.array(dataFields)
       })
     })
   }

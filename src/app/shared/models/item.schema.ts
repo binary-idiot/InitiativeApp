@@ -1,9 +1,11 @@
+import {FormArray, FormControl, FormGroup} from "@angular/forms";
+
 export enum ItemDataFieldType {
   Text,
   Number
 }
 
-export type ItemDataFieldValueType = string | Number;
+export type ItemFieldValueType = string | number;
 
 export interface ItemPrimaryFieldSchema<T> {
   label: string,
@@ -14,7 +16,7 @@ export interface ItemDataFieldSchema {
   key: number;
   label: string;
   type: ItemDataFieldType;
-  defaultValue: ItemDataFieldValueType;
+  defaultValue: ItemFieldValueType;
   required: boolean;
 }
 
@@ -24,3 +26,21 @@ export interface ItemSchema {
   dataFields: ItemDataFieldSchema[];
 }
 
+export interface ItemPrimaryFieldForm<T> {
+  label: FormControl<string>;
+  defaultValue: FormControl<T>
+}
+
+export interface ItemDataFieldForm {
+  key: FormControl<number>;
+  label: FormControl<string>;
+  type: FormControl<any>;
+  defaultValue: FormControl<ItemFieldValueType>
+  required: FormControl<boolean>;
+}
+
+export interface ItemModelForm {
+  nameField: FormGroup<ItemPrimaryFieldForm<string>>;
+  orderField: FormGroup<ItemPrimaryFieldForm<number>>;
+  dataFields: FormArray<FormGroup<ItemDataFieldForm>>;
+}
