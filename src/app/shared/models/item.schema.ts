@@ -1,6 +1,6 @@
 import {FormArray, FormControl, FormGroup} from "@angular/forms";
 
-export enum ItemDataFieldType {
+export enum ItemFieldType {
   Text,
   Number
 }
@@ -15,7 +15,7 @@ export interface ItemPrimaryFieldSchema<T> {
 export interface ItemDataFieldSchema {
   key: number;
   label: string;
-  type: ItemDataFieldType;
+  type: ItemFieldType;
   defaultValue: ItemFieldValueType;
   required: boolean;
 }

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {GameSystem} from "@shared/models/game-system.model";
-import {ItemDataFieldType} from "@shared/models/item.schema";
+import {ItemFieldType} from "@shared/models/item.schema";
 
 @Injectable({
   providedIn: 'root'
@@ -25,14 +25,14 @@ export class GameSystemService {
             {
               key: 0,
               label: 'Health',
-              type: ItemDataFieldType.Number,
+              type: ItemFieldType.Number,
               defaultValue: 0,
               required: true
             },
             {
               key: 1,
               label: 'Armor',
-              type: ItemDataFieldType.Number,
+              type: ItemFieldType.Number,
               defaultValue: 0,
               required: true
             }
@@ -56,14 +56,14 @@ export class GameSystemService {
             {
               key: 0,
               label: 'HP',
-              type: ItemDataFieldType.Number,
+              type: ItemFieldType.Number,
               defaultValue: 0,
               required: true
             },
             {
               key: 1,
               label: 'AC',
-              type: ItemDataFieldType.Number,
+              type: ItemFieldType.Number,
               defaultValue: 0,
               required: true
             }

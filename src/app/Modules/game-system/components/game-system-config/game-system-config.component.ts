@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {GameSystemService} from "@modules/game-system/services/game-system.service";
-import {Observable, of, Subscription, switchMap, take} from "rxjs";
+import {BehaviorSubject, Subscription, take} from "rxjs";
 import {GameSystem, GameSystemForm} from "@shared/models/game-system.model";
 import {GameSystemFacade} from "@modules/game-system/game-system.facade";
 import {nameOf} from "@shared/utils/type-utils";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ItemDataFieldSchema} from "@shared/models/item.schema";
+import {ItemDataFieldSchema, ItemFieldType} from "@shared/models/item.schema";
 
 
 
@@ -17,16 +17,18 @@ import {ItemDataFieldSchema} from "@shared/models/item.schema";
   styleUrls: ['./game-system-config.component.scss']
 })
 export class GameSystemConfigComponent implements OnInit, OnDestroy {
+  fieldType = ItemFieldType;
   optionLabel: string = nameOf<GameSystem>('name');
   systemSub: Subscription;
   systems: GameSystem[];
-  selectedSystem$: Observable<GameSystem | null>;
   systemForm: FormGroup<GameSystemForm>;
+  selectedSystem$: BehaviorSubject<GameSystem | null> = new BehaviorSubject<GameSystem | null>(null);
 
   constructor(
     public systemService: GameSystemService,
     public systemFacade: GameSystemFacade,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private changeDetector: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -36,13 +38,15 @@ export class GameSystemConfigComponent implements OnInit, OnDestroy {
         this.systems.push(this.systemService.getNewSystem());
     });
 
-    this.selectedSystem$ = this.systemFacade.selectedSystem$
-      .pipe(
-        take(1),
-        switchMap((system: GameSystem | null) => {
-          return of(system);
-        })
-      )
+    this.systemFacade.selectedSystem$
+      .pipe(take(1))
+      .subscribe((system: GameSystem | null) => {
+        this.selectedSystem$.next(system);
+
+        if (system !== null){
+          this.buildForm(system);
+        }
+      });
   }
 
   buildForm(system: GameSystem): void {
@@ -70,6 +74,11 @@ export class GameSystemConfigComponent implements OnInit, OnDestroy {
         dataFields: this.fb.nonNullable.array(dataFields)
       })
     })
+
+    this.changeDetector.detectChanges();
+  }
+
+  saveSystem(): void {
   }
 
   ngOnDestroy(): void {

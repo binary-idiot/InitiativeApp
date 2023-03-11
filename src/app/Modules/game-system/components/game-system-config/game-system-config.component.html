@@ -1,3 +1,59 @@
 <p-dropdown [options]="systems"
             [(ngModel)]="selectedSystem$"
-            [optionLabel]="optionLabel"></p-dropdown>
+            [optionLabel]="optionLabel"
+            (onChange)="buildForm($event.value)">
+</p-dropdown>
+
+<ng-container *ngIf="systemForm">
+  <form [formGroup]="systemForm"
+        (ngSubmit)="saveSystem()"
+    class="grid p-fluid">
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">System Name</span>
+      <input type="text" pInputText
+        formControlName="name">
+    </div>
+    <div>
+      <ng-container *ngTemplateOutlet="primaryField;
+        context: {
+        $implicit: systemForm.get('itemModel.nameField'),
+        fieldTitle: 'Entity Name',
+        valueType: fieldType.Text
+        }">
+      </ng-container>
+      <ng-container *ngTemplateOutlet="primaryField;
+        context: {
+        $implicit: systemForm.get('itemModel.orderField'),
+        fieldTitle: 'Order',
+        valueType: fieldType.Number
+        }">
+      </ng-container>
+    </div>
+  </form>
+</ng-container>
+
+
+<ng-template #primaryField let-form let-fieldTitle="fieldTitle" let-valueType="valueType">
+  <div [formGroup]="form">
+    <h3>{{fieldTitle}}</h3>
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">Label</span>
+      <input type="text" pInputText
+             formControlName="label">
+    </div>
+
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">Default Value</span>
+      <ng-container [ngSwitch]="valueType">
+
+        <input *ngSwitchCase="fieldType.Text"
+               type="text" pInputText
+               formControlName="defaultValue">
+
+        <p-inputNumber *ngSwitchCase="fieldType.Number"
+                       formControlName="defaultValue">
+        </p-inputNumber>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>

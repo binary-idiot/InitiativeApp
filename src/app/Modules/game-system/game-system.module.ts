@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameSystemConfigComponent } from './components/game-system-config/game-system-config.component';
 import {DropdownModule} from "primeng/dropdown";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { GameSystemSelectComponent } from './components/game-system-select/game-system-select.component';
+import {InputTextModule} from "primeng/inputtext";
+import {InputNumberModule} from "primeng/inputnumber";
 
 
 
@@ -19,7 +21,10 @@ import { GameSystemSelectComponent } from './components/game-system-select/game-
   imports: [
     CommonModule,
     DropdownModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    InputNumberModule
   ]
 })
 export class GameSystemModule { }

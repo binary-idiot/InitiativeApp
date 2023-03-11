@@ -3,7 +3,7 @@
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {
   ItemDataFieldSchema,
-  ItemDataFieldType,
+  ItemFieldType,
   ItemSchema
 } from "@shared/models/item.schema";
 import {filter, Subscription} from "rxjs";
@@ -24,7 +24,7 @@ export class TrackerItemControlsComponent implements OnInit, OnDestroy{
   itemForm: FormGroup;
   itemSchema: ItemSchema;
 
-  readonly fieldType = ItemDataFieldType;
+  readonly fieldType = ItemFieldType;
 
   constructor(
     public systemFacade: GameSystemFacade,
