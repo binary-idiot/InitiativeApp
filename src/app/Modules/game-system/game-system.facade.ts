@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {GameSystem} from "@shared/models/game-system.model";
 import {GameSystemActions} from "@modules/game-system/store/game-system.actions";
 import SetSelected = GameSystemActions.SetSelected;
+import Save = GameSystemActions.Save;
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,11 @@ export class  GameSystemFacade {
     private store: Store
   ) {}
 
-  changeSystem(systemKey: number){
+  changeSystem(systemKey: number): void {
     this.store.dispatch(new SetSelected(systemKey));
+  }
+
+  saveSystem(system: GameSystem): void {
+    this.store.dispatch(new Save(system))
   }
 }

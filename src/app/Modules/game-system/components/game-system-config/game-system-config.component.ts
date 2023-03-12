@@ -79,6 +79,9 @@ export class GameSystemConfigComponent implements OnInit, OnDestroy {
   }
 
   saveSystem(): void {
+    if (this.systemForm){
+      this.systemFacade.saveSystem(this.systemForm.value as GameSystem);
+    }
   }
 
   ngOnDestroy(): void {
