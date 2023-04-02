@@ -13,21 +13,50 @@
       <input type="text" pInputText
         formControlName="name">
     </div>
-    <div>
+    <div *ngIf="systemForm.controls.itemModel as itemModelForm">
       <ng-container *ngTemplateOutlet="primaryField;
         context: {
-        $implicit: systemForm.get('itemModel.nameField'),
+        $implicit: itemModelForm.get('nameField'),
         fieldTitle: 'Entity Name',
         valueType: fieldType.Text
         }">
       </ng-container>
       <ng-container *ngTemplateOutlet="primaryField;
         context: {
-        $implicit: systemForm.get('itemModel.orderField'),
+        $implicit: itemModelForm.get('orderField'),
         fieldTitle: 'Order',
         valueType: fieldType.Number
         }">
       </ng-container>
+
+      <div *ngIf="itemModelForm.controls.dataFields.controls as dataFields">
+        <h3>Data Fields</h3>
+        <ng-container *ngFor="let field of dataFields; let i = index">
+          <div [formGroup]="field">
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon">Label</span>
+              <input type="text" pInputText
+                     formControlName="label">
+            </div>
+
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon">Type</span>
+              <p-dropdown [options]="fieldType | enumKeyVal"
+                          optionLabel="key"
+                          optionValue="value"
+                          formControlName="type">
+              </p-dropdown>
+            </div>
+
+            <ng-container *ngTemplateOutlet="defaultValueTemplate; context: {
+              $implicit: field.controls.defaultValue,
+              valueType: field.controls.type.value
+            }">
+            </ng-container>
+          </div>
+        </ng-container>
+      </div>
+
     </div>
     <button pButton type="submit">Submit</button>
   </form>
@@ -43,18 +72,26 @@
              formControlName="label">
     </div>
 
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">Default Value</span>
-      <ng-container [ngSwitch]="valueType">
+    <ng-container *ngTemplateOutlet="defaultValueTemplate; context: {
+      $implicit: form.get('defaultValue'),
+      valueType: valueType
+    }">
+    </ng-container>
+  </div>
+</ng-template>
 
-        <input *ngSwitchCase="fieldType.Text"
-               type="text" pInputText
-               formControlName="defaultValue">
+<ng-template #defaultValueTemplate let-formControl let-valueType="valueType">
+  <div class="p-inputgroup">
+    <span class="p-inputgroup-addon">Default Value</span>
+    <ng-container [ngSwitch]="valueType">
 
-        <p-inputNumber *ngSwitchCase="fieldType.Number"
-                       formControlName="defaultValue">
-        </p-inputNumber>
-      </ng-container>
-    </div>
+      <input *ngSwitchCase="fieldType.Text"
+             type="text" pInputText
+             [formControl]="formControl">
+
+      <p-inputNumber *ngSwitchCase="fieldType.Number"
+                     [formControl]="formControl">
+      </p-inputNumber>
+    </ng-container>
   </div>
 </ng-template>

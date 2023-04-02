@@ -15,17 +15,17 @@ import {GameSystemState} from "@modules/game-system/store/game-system.state";
   declarations: [
     AppComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        NavModule,
-        NgxsModule.forRoot([GameSystemState], {
-          developmentMode: isDevMode()
-        }),
-      NgxsReduxDevtoolsPluginModule.forRoot()
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    NavModule,
+    NgxsModule.forRoot([GameSystemState], {
+      developmentMode: isDevMode()
+    }),
+    NgxsReduxDevtoolsPluginModule.forRoot()
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

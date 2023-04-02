@@ -7,6 +7,7 @@ import { GameSystemSelectComponent } from './components/game-system-select/game-
 import {InputTextModule} from "primeng/inputtext";
 import {InputNumberModule} from "primeng/inputnumber";
 import {ButtonModule} from "primeng/button";
+import {UtilitiesModule} from "@shared/utilities.module";
 
 
 
@@ -26,7 +27,8 @@ import {ButtonModule} from "primeng/button";
     ReactiveFormsModule,
     InputTextModule,
     InputNumberModule,
-    ButtonModule
+    ButtonModule,
+    UtilitiesModule
   ]
 })
 export class GameSystemModule { }
