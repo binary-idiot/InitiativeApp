@@ -3,3 +3,13 @@
 ul {
   list-style: none;
 }
+
+// Fixes width 1% issue with prime components
+.p-inputgroup{
+  p-dropdown, p-autoComplete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
