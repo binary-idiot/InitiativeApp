@@ -7,21 +7,26 @@
 <ng-container *ngIf="systemForm">
   <form [formGroup]="systemForm"
         (ngSubmit)="saveSystem()"
-    class="grid p-fluid">
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">System Name</span>
-      <input type="text" pInputText
-        formControlName="name">
+        class="grid p-fluid">
+    <div class="col-12">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">System Name</span>
+        <input type="text" pInputText
+          formControlName="name">
+      </div>
     </div>
-    <div *ngIf="systemForm.controls.itemModel as itemModelForm">
-      <ng-container *ngTemplateOutlet="primaryField;
+    <div *ngIf="systemForm.controls.itemModel as itemModelForm"
+        class="col-12 grid column-gap-1">
+      <ng-container class="col-6"
+        *ngTemplateOutlet="primaryField;
         context: {
         $implicit: itemModelForm.get('nameField'),
         fieldTitle: 'Entity Name',
         valueType: fieldType.Text
         }">
       </ng-container>
-      <ng-container *ngTemplateOutlet="primaryField;
+      <ng-container class="col-6"
+        *ngTemplateOutlet="primaryField;
         context: {
         $implicit: itemModelForm.get('orderField'),
         fieldTitle: 'Order',
@@ -29,32 +34,36 @@
         }">
       </ng-container>
 
-      <div *ngIf="itemModelForm.controls.dataFields.controls as dataFields">
+      <div *ngIf="itemModelForm.controls.dataFields.controls as dataFields"
+          class="col-12">
         <h3>Data Fields</h3>
-        <ng-container *ngFor="let field of dataFields; let i = index">
-          <div [formGroup]="field">
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon">Label</span>
-              <input type="text" pInputText
-                     formControlName="label">
-            </div>
+        <div class="grid">
+          <ng-container *ngFor="let field of dataFields; let i = index">
+            <div [formGroup]="field"
+                class="col-6">
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">Label</span>
+                <input type="text" pInputText
+                       formControlName="label">
+              </div>
 
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon">Type</span>
-              <p-dropdown [options]="fieldType | enumKeyVal"
-                          optionLabel="key"
-                          optionValue="value"
-                          formControlName="type">
-              </p-dropdown>
-            </div>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">Type</span>
+                <p-dropdown [options]="fieldType | enumKeyVal"
+                            optionLabel="key"
+                            optionValue="value"
+                            formControlName="type">
+                </p-dropdown>
+              </div>
 
-            <ng-container *ngTemplateOutlet="defaultValueTemplate; context: {
-              $implicit: field.controls.defaultValue,
-              valueType: field.controls.type.value
-            }">
-            </ng-container>
-          </div>
-        </ng-container>
+              <ng-container *ngTemplateOutlet="defaultValueTemplate; context: {
+                $implicit: field.controls.defaultValue,
+                valueType: field.controls.type.value
+              }">
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
       </div>
 
     </div>
